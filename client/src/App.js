@@ -8,6 +8,9 @@ import Formtable from './components/Formtable';
 axios.defaults.baseURL = "http://localhost:8080/";
 
 function App() {
+  useEffect(() => {
+    document.title = 'CRUD Operation';
+  }, []);
 
   const [addSection,setAddSection] = useState(false)
   const [editSection,setEditSection] = useState(false)
