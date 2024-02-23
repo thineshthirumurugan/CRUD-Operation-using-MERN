@@ -11,9 +11,9 @@ const PORT = process.env.PORT || 8080;
 const schemaData = mongoose.Schema({
     name : String,
     email : String,
-    mobile : Number,
+    mobile : String,
 },{
-    timestamps : true
+    timestamps : true //With timestamps: true, if you create a new document and save it to the MongoDB database, Mongoose will automatically add createdAt and updatedAt fields to that document, populating them with the current date and time. If you subsequently update that document and save it again, Mongoose will automatically update the updatedAt field with the current date and time.
 })
 const userModel = mongoose.model("user",schemaData)
 
@@ -34,10 +34,10 @@ app.post("/create",async(req,res)=>{
 //update data
 app.put("/update",async(req,res)=>{
     console.log(req.body)
-    const {id,...rest} = req.body;
+    const {_id,...rest} = req.body;
 
     console.log(rest)
-    const data = await userModel.updateOne({ _id : id},rest)
+    const data = await userModel.updateOne({ _id : _id},rest)
     res.send({success : true,message : "data update successfully", data : data})
 })
 
